@@ -30,6 +30,6 @@ THEN I can save my initials and my score
 
 ## Mock-Up
 - here is a picture of what I was able to make work on the page, as well as a link to the page
-
+-   https://jcxxz.github.io/timed-quiz/
 
 ![timed quiz pic](https://user-images.githubusercontent.com/117127694/208803089-0cd90592-5249-4ffe-8bd1-0a19cfb9e8ee.png)
