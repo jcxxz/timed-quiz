@@ -1,18 +1,22 @@
-const startBtn = document.getElementById('start-btn')
-const nextBtn = document.getElementById('next-btn')
+const startButton = document.getElementById('start-btn')
+const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById
 ('question-container')
 const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById
+const answerButtonElement = document.getElementById
 ('answer-btns')
  
 let shuffledQuestions, currentQuestionsIndex
 
-startBtn.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame)
+nextButton.addEventListener('click', () => {
+    currentQuestionsIndex++
+    setNextQuestion()
+})
 
 function startGame() {
 console.log('Started')
-startBtn.classList.add('hide')
+startButton.classList.add('hide')
 shuffledQuestions = questions.sort(() => Math.random() - .5)
 currentQuestionsIndex = 0
 questionContainerElement.classList.remove('hide')
@@ -34,24 +38,44 @@ function showQuestion(question) {
             button.dataset.correct = answer.correct
         } 
         button.addEventListener('click', selectAnswer)
-        answerButtonsElement.appendChild(button)
+        answerButtonElement.appendChild(button)
     } )
 }
 
 function resetState() {
-    nextBtn.classList.add('hide')
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild
-        (answerButtonsElement.firstChild)
+    nextButton.classList.add('hide')
+    while (answerButtonElement.firstChild) {
+        answerButtonElement.removeChild
+        (answerButtonElement.firstChild).forEach(button => {
+            setStatusClass(button, button.dataset.correct)
+        })
     }
+}
+
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add('correct')
+    }else {
+        element.classList.add('wrong')
+    }
+    }
+
+function clearStatusClass(element) {
+    element.classList.remove('correct')
+    element.classList.wrong('wrong')
 }
 
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
     setStatusClass(document.body, correct)
-    Array.from(answerButtonsElement.children)
+     Array.from(answerButtonElement.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct)
+    })
 }
+nextButton.classList.remove('hide') 
+
 
 const questions = [
     {
@@ -59,6 +83,29 @@ const questions = [
         answers: [
             { text: '6', correct: true },
             { text: '22', correct: false }
-        ]
+        ],
+    
+
+    
+        question: 'what is 2+4?',
+        answers: [
+            { text: '6', correct: true },
+            { text: '22', correct: false }
+        ],
+    
+
+    
+        question: 'what is 2+4?',
+        answers: [
+            { text: '6', correct: true },
+            { text: '22', correct: false }
+        ],
+
+        question: 'what is 2+4?',
+        answers: [
+            { text: '6', correct: true },
+            { text: '22', correct: false }
+        ],
     }
 ]
+
